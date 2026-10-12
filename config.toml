@@ -1,0 +1,218 @@
+# New-grad job alert bot config.
+# The Discord webhook URL is NOT stored here; it comes from the
+# DISCORD_WEBHOOK_URL environment variable / GitHub secret.
+
+[settings]
+# Which kinds of tech roles to alert on. Delete any you don't want.
+#   software  developer, SWE, web/mobile, embedded, general "engineer"
+#   data      data analyst/scientist/engineer, BI, ML/AI, analytics
+#   it        IT support, service desk, sysadmin, network, cloud, DevOps/SRE, DBA
+#   security  cybersecurity, SOC, IAM, AppSec
+#   qa        QA, test automation, SDET
+#   product   APM, business/systems analyst, tech consulting, UX/UI, technical writer
+categories = ["software", "data", "it", "security", "qa", "product"]
+
+# true  = Canada + US + remote (anything not clearly overseas)
+# false = Canada + roles that say "remote"
+include_us = true
+
+# false: titles with no level ("Data Analyst", "Software Engineer") still alert, without 🎓.
+#        Noisier, but many entry-level roles are titled that way.
+# true:  only titles with new grad / junior / entry-level / associate / early talent /
+#        rotational / "Analyst I" / Tier 1 / 2026 / 2027 etc. Much quieter.
+require_junior_keyword = false
+
+# Optional ping on the first message of each batch, e.g. "<@123456789012345678>"
+# (Discord: Settings > Advanced > Developer Mode, then right-click yourself > Copy User ID)
+mention = ""
+
+# Safety valve so a misconfigured filter can't spam 300 messages.
+max_alerts_per_run = 40
+
+# Any of these regexes can be overridden here; defaults live in jobbot/filters.py.
+# exclude_pattern = '...'
+# [settings.category_patterns]
+# data = '...'
+
+# ---------------------------------------------------------------------------
+# Companies. Find the board from any job link at the company:
+#   job-boards.greenhouse.io/<slug>/...  or boards.greenhouse.io/<slug>  -> greenhouse
+#   jobs.lever.co/<slug>/...                                             -> lever
+#   jobs.ashbyhq.com/<slug>/...                                          -> ashby
+#   <tenant>.wd3.myworkdayjobs.com/<site>/...                            -> workday (put the url)
+# Every board below was confirmed to exist on Oct 12, 2026. Run
+# `python bot.py --check` now and then; companies switch ATS every so often.
+# ---------------------------------------------------------------------------
+
+# --- Workday: banks, insurers, energy, enterprise (18) ---
+# Each runs the default tech/new-grad searches (WORKDAY_DEFAULT_SEARCHES in jobbot/sources.py).
+
+[[companies]]
+name = "RBC"
+source = "workday"
+url = "https://rbc.wd3.myworkdayjobs.com/RBCGLOBAL1"
+
+[[companies]]
+name = "TD"
+source = "workday"
+url = "https://td.wd3.myworkdayjobs.com/TD_Bank_Careers"
+
+[[companies]]
+name = "BMO"
+source = "workday"
+url = "https://bmo.wd3.myworkdayjobs.com/External"
+
+[[companies]]
+name = "CIBC"
+source = "workday"
+url = "https://cibc.wd3.myworkdayjobs.com/search"
+
+[[companies]]
+name = "Manulife"
+source = "workday"
+url = "https://manulife.wd3.myworkdayjobs.com/MFCJH_Jobs"
+
+[[companies]]
+name = "Sun Life"
+source = "workday"
+url = "https://sunlife.wd3.myworkdayjobs.com/Experienced-Jobs"
+
+[[companies]]
+name = "Thomson Reuters"
+source = "workday"
+url = "https://thomsonreuters.wd5.myworkdayjobs.com/External_Career_Site"
+
+[[companies]]
+name = "Canadian Tire"
+source = "workday"
+url = "https://canadiantirecorporation.wd3.myworkdayjobs.com/Enterprise_External_Careers_Site"
+
+[[companies]]
+name = "Enbridge"
+source = "workday"
+url = "https://enbridge.wd3.myworkdayjobs.com/enbridge_careers"
+
+[[companies]]
+name = "TC Energy"
+source = "workday"
+url = "https://tcenergy.wd3.myworkdayjobs.com/CAREER_SITE_TC"
+
+[[companies]]
+name = "Suncor"
+source = "workday"
+url = "https://suncor.wd1.myworkdayjobs.com/Suncor_External"
+
+[[companies]]
+name = "Cenovus"
+source = "workday"
+url = "https://cenovus.wd3.myworkdayjobs.com/careers"
+
+[[companies]]
+name = "Magna"
+source = "workday"
+url = "https://magna.wd3.myworkdayjobs.com/Magna"
+
+[[companies]]
+name = "CAE"
+source = "workday"
+url = "https://cae.wd3.myworkdayjobs.com/career"
+
+[[companies]]
+name = "BlackBerry"
+source = "workday"
+url = "https://bb.wd3.myworkdayjobs.com/BlackBerry"
+
+[[companies]]
+name = "Clio"
+source = "workday"
+url = "https://clio.wd3.myworkdayjobs.com/ClioCareerSite"
+
+[[companies]]
+name = "Arctic Wolf"
+source = "workday"
+url = "https://arcticwolf.wd1.myworkdayjobs.com/External"
+
+[[companies]]
+name = "Ciena"
+source = "workday"
+url = "https://ciena.wd5.myworkdayjobs.com/Careers"
+
+# --- Ashby: Canadian tech (8) ---
+
+[[companies]]
+name = "Wealthsimple"
+source = "ashby"
+slug = "wealthsimple"
+
+[[companies]]
+name = "1Password"
+source = "ashby"
+slug = "1password"
+
+[[companies]]
+name = "Cohere"
+source = "ashby"
+slug = "cohere"
+
+[[companies]]
+name = "Jobber"
+source = "ashby"
+slug = "jobber"
+
+[[companies]]
+name = "KOHO"
+source = "ashby"
+slug = "koho"
+
+[[companies]]
+name = "Neo Financial"
+source = "ashby"
+slug = "neofinancial"
+
+[[companies]]
+name = "Float"
+source = "ashby"
+slug = "float"
+
+[[companies]]
+name = "Lightspeed"
+source = "ashby"
+slug = "lightspeedhq"
+
+# --- Greenhouse: Canadian tech (4) ---
+
+[[companies]]
+name = "D2L"
+source = "greenhouse"
+slug = "d2l"
+
+[[companies]]
+name = "Geotab"
+source = "greenhouse"
+slug = "geotab"
+
+[[companies]]
+name = "Ada"
+source = "greenhouse"
+slug = "ada18"
+
+[[companies]]
+name = "Hootsuite"
+source = "greenhouse"
+slug = "hootsuite"
+
+# --- US tech with some Canadian hiring (not verified; uncomment to try) ---
+# [[companies]]
+# name = "Stripe"
+# source = "greenhouse"
+# slug = "stripe"
+#
+# [[companies]]
+# name = "Databricks"
+# source = "greenhouse"
+# slug = "databricks"
+#
+# [[companies]]
+# name = "OpenAI"
+# source = "ashby"
+# slug = "openai"
