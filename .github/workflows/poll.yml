@@ -4,7 +4,7 @@ on:
   schedule:
     # Every 15 minutes. GitHub may run scheduled jobs a few minutes late under load.
     # On a PRIVATE repo, change to "*/30 * * * *" to stay inside the 2,000 free minutes/month.
-    - cron: "*/15 * * * *"
+   - cron: "7,22,37,52 * * * *"  
   workflow_dispatch: {}   # "Run workflow" button for testing
 
 permissions:
